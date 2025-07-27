@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os 
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,16 +79,27 @@ WSGI_APPLICATION = 'Drishti1.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'accounts',
-        'USER' : 'root',
-        'PASSWORD' : 'Drishti2005',
-        'HOST' : 'localhost',
-        'PORT' : '3306',
+if 'RENDER_EXTERNAL_HOSTNAME' in os.environ:
+    # If on Render, it uses the DATABASE_URL environment variable
+    # to connect to your production database.
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ.get('DATABASE_URL'),
+            conn_max_age=600
+        )
     }
-}
+else:
+    # If running locally, it uses your local MySQL settings
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'accounts',
+            'USER': 'root',
+            'PASSWORD': 'Drishti2005',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        }
+    }
 
 
 # Password validation
