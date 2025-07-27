@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #A2D3CE; /* Set the background color for the entire page */
+      color: #333; /* Set slightly darker text color for better visibility */
+    }
+
+    header {
+      text-align: center;
+      width: 100%;
+      padding: 30px 0;
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive; /* Apply a cute font to the header */
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    input[type='text'],
+    input[type='password'],
+    input[type='email'],
+    input[type='submit'] {
+      margin: 10px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #9DBBB6; /* Slightly darker background color for the form elements */
+      color: #f0f0f0; /* Slightly lighter text color for better visibility */
+    }
+
+    input[type='submit'] {
+      cursor: pointer;
+      background-color: #7F7F7F; /* Slightly darker background color for the submit button */
+    }
+
+    input[type='submit']:hover {
+      background-color: #FF69B4; /* Slightly lighter background color on hover for the submit button */
+    }
+
+    div {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    div h3 {
+      margin: 5px;
+    }
+
+    footer {
+      text-align: center;
+      width: 100%;
+      padding: 30px 0;
+    }
+  </style>
+  <title>Registration</title>
+</head>
+<body>
+  <header>
+    <h1><b>DELISH DELIGHT</b></h1>
+  </header>
+  <form action='register' method='post'>
+    {% csrf_token %}
+    <input type='text' name='first_name' placeholder='First Name'><br>
+    <input type='text' name='last_name' placeholder='Last Name'><br>
+    <input type='text' name='username' placeholder='Username'><br>
+    <input type='email' name='email' placeholder='Email'><br>
+    <input type='password' name='password1' placeholder='Password'><br>
+    <input type='password' name='password2' placeholder='Confirm Password'><br>
+    <input type="submit" value="Submit">
+  </form>
+  <div>
+    {% for message in messages %}
+    <h3>{{message}}</h3>
+    {% endfor %}
+  </div>
+  <footer>
+    <p>&copy; Drishti's Imaginary Bakery</p>
+  </footer>
+</body>
+</html>

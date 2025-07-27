@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #A2D3CE; /* Set the background color for the entire page */
+      color: white; /* Set text color to white for better visibility */
+    }
+
+    header {
+      text-align: center;
+      width: 100%;
+      padding: 30px 0;
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav li {
+      padding: 10px 20px;
+    }
+
+    nav li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5em;
+      background-color: pink; /* Example background color for the buttons */
+      padding: 15px 30px; /* Adjust padding to increase button size */
+      border-radius: 10px; /* Add rounded corners to the buttons */
+    }
+
+    nav li a:hover {
+      background-color: #f1f1f1;
+    }
+
+    footer {
+      text-align: center;
+      width: 100%;
+      padding: 30px 0;
+    }
+  </style>
+  <title >Delish Delight</title>
+</head>
+<body>
+  <header>
+    <h1 style="font-family: Papyrus"><b>DELISH DELIGHT</b></h1>
+  </header>
+  <div style="text-align: center;">
+    <img src="{% static 'C:\Users\butte\projects\Drishti1\static\images\BakeryLogo.png' %}" alt="Product 1" height="200" width="200" >
+    </div>
+  <nav>
+    <ul>
+      <li><a href="accounts/register">Register</a></li>
+      <li><a href="accounts/login">Login</a></li>
+
+    </ul>
+ 
+
+  </nav>
+  <footer>
+    <p>&copy; Drishti's Imaginary Bakery</p>
+  </footer>
+</body>
+</html>

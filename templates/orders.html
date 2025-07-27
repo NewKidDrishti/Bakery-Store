@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f2f2f2;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #A2D3CE;
+            color: mediumpurple;
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .empty-orders {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: gray;
+        }
+
+        footer {
+            background-color: #A2D3CE;
+            color: mediumpurple;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+    </style>
+    <title>Your Orders</title>
+</head>
+<body>
+    <header>
+        <h1 style="font-family: Papyrus, serif; padding-left: 40px;">Delish Delight- By Drishti</h1>
+        <nav>
+            <ul>
+                <li> Hello, {{ user.first_name }}</li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'orders' %}">Orders</a></li>
+                <li><a href="{% url 'view_cart' %}">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Your Orders</h1>
+        
+        {% if orders %}
+            {% for order in orders %}
+                <p>Order #{{ order.id }} - Total: ${{ order.total_price }}</p>
+            {% endfor %}
+        {% else %}
+            <div class="empty-orders">
+                <p>You have not placed any orders yet.</p>
+            </div>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; Drishti's Imaginary Bakery</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f2f2f2; /* Light gray background color */
+    }
+
+    header {
+      background-color: #A2D3CE; /* Header background color */
+      color: mediumpurple; /* Header text color */
+      padding: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+    }
+
+    nav li {
+      margin-right: 20px;
+    }
+
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .product {
+      width: 200px;
+      text-align: center;
+      background-color: white;
+      padding: 10px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    footer {
+      background-color: #A2D3CE; /* Footer background color */
+      color: mediumpurple; /* Footer text color */
+      text-align: center;
+      padding: 20px;
+      width: 100%;
+    }
+  </style>
+  <title>Product Catalog</title>
+</head>
+<body>
+  <header>
+    <h1 style="font-family: Papyrus, serif; padding-left: 40px;">Delish Delight- By Drishti</h1>
+    <nav>
+      <ul>
+        <li> Hello, {{user.first_name}}</li>
+        <li><a href="profile">Profile</a></li>
+        <li><a href="logout">Logout</a></li>
+        <li><a href="orders">Orders</a></li>
+        <li><a href="cart">Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main style="font-family: 'Courier New', monospace">
+    <div class="product">
+        <a href="donuts"><img src="{% static 'C:\Users\butte\projects\Drishti1\static\images\Donuts.jpg' %}" alt="Product 1" height="200" width="200" ></a>
+        <h3>DONUTS</h3>
+      <p>Glazed Donuts</p>
+    </div>
+    <div class="product">
+        <img src="{% static 'C:\Users\butte\projects\Drishti1\static\images\cake.jpg' %}" alt="Product 1" height="200" width="200" >
+      <h3>CAKES</h3>
+      <p>Birthday Cakes</p>
+    </div>
+    <div class="product">
+        <img src="{% static 'C:\Users\butte\projects\Drishti1\static\images\cookies.jpeg' %}" alt="Product 1" height="200" width="200" >
+      <h3>COOKIES</h3>
+      <p>Cookies and Creme</p>
+    </div>
+    <div class="product">
+        <img src="{% static 'C:\Users\butte\projects\Drishti1\static\images\Croissant.jpg' %}" alt="Product 1" height="200" width="200" >
+      <h3>CROISSANT</h3>
+      <p>French Croissants</p>
+    </div>
+    <div class="product">
+        <img src="{% static 'C:\Users\butte\projects\Drishti1\static\images\cupcake.jpg' %}" alt="Product 1" height="200" width="200" >
+      <h3>CUPCAKES</h3>
+      <p>Cakes in a Cup</p>
+    </div>
+    <div class="product">
+        <img src="{% static 'C:\Users\butte\projects\Drishti1\static\images\shakes.jpg' %}" alt="Product 1" height="200" width="200" >
+      <h3>SHAKES</h3>
+      <p>Sweet Shakes</p>
+    </div>
+    <div class="product">
+        <img src="{% static 'C:\Users\butte\projects\Drishti1\static\images\Waffles.jpg' %}" alt="Product 1" height="200" width="200" >
+      <h3>WAFFLES</h3>
+      <p>Tasty Waffles</p>
+    </div>
+    <div class="product">
+        <img src="{% static 'C:\Users\butte\projects\Drishti1\static\images\GArlicBread.jpg' %}" alt="Product 1" height="200" width="200" >
+      <h3>GARLIC BREAD</h3>
+      <p>Italian Garlic Bread</p>
+    </div>
+    <div class="product">
+        <img src="{% static 'C:\Users\butte\projects\Drishti1\static\images\pie.jpg' %}" alt="Product 1" height="200" width="200" >
+      <h3>PIE</h3>
+      <p>Flavourful Pie</p>
+    </div>
+   <div class="product">
+    <img src="{% static 'C:\Users\butte\projects\Drishti1\static\images\coffeee.jpeg' %}" alt="Product 1" height="200" width="200" >
+    <h3>COFFEE</h3>
+      <p>Coffee and Cappuccino</p>
+    </div>
+
+  </main>
+  <footer>
+    <p>&copy; Drishti's Imaginary Bakery</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #A2D3CE;
+            color: mediumpurple;
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            width: 200px;
+            text-align: center;
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            position: relative; /* Needed for positioning the message */
+        }
+        
+        .product button[type="submit"] {
+            background-color: #ffb6c1;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .product button[type="submit"]:hover {
+            background-color: #ffc2d1;
+        }
+        
+        /* New CSS for the animated message */
+        .cart-message {
+            position: absolute;
+            bottom: 60px; /* Position it above the add-to-cart button */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #83c5be;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .cart-message.show {
+            opacity: 1;
+        }
+
+        footer {
+            background-color: #A2D3CE;
+            color: mediumpurple;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+    </style>
+    <title>Product Catalog</title>
+</head>
+<body>
+    <header>
+        <h1 style="font-family: Papyrus, serif; padding-left: 40px;">Delish Delight- By Drishti</h1>
+        <nav>
+            <ul>
+                <li> Hello, {{user.first_name}}</li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'orders' %}">Orders</a></li>
+                <li><a href="{% url 'view_cart' %}">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main style="font-family: 'Courier New', monospace">
+        {% for product in products %}
+            <div class="product">
+                <img src="{{ product.img.url }}" alt="{{ product.name }}" height="200" width="200">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.desc }}</p>
+                <p>Price: ${{ product.price }}</p>
+                <p class="stock-display">In Stock: {{ product.stock }}</p>
+                
+                <form class="add-to-cart-form" method="post" action="{% url 'add_to_cart' product.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}">
+                    <button type="submit">Add to Cart</button>
+                </form>
+                
+                <div class="cart-message" data-product-id="{{ product.id }}"></div>
+            </div>
+        {% empty %}
+            <p>No products available yet. Please add some in the admin panel.</p>
+        {% endfor %}
+    </main>
+    
+    <footer>
+        <p>&copy; Drishti's Imaginary Bakery</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const forms = document.querySelectorAll('.add-to-cart-form');
+            forms.forEach(form => {
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(form);
+                    const actionUrl = form.getAttribute('action');
+
+                    try {
+                        const response = await fetch(actionUrl, {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        const data = await response.json();
+                        const productId = formData.get('product_id');
+
+                        const messageDiv = document.querySelector(`.cart-message[data-product-id="${productId}"]`);
+                        const stockDisplay = form.closest('.product').querySelector('.stock-display');
+                        
+                        if (data.success) {
+                            messageDiv.textContent = data.message;
+                            stockDisplay.textContent = `In Stock: ${data.new_stock}`;
+                        } else {
+                            messageDiv.textContent = data.message;
+                            messageDiv.style.backgroundColor = '#ff6b6b';
+                        }
+                        
+                        messageDiv.classList.add('show');
+                        setTimeout(() => {
+                            messageDiv.classList.remove('show');
+                            messageDiv.style.backgroundColor = '';
+                        }, 2000); // Message shows for 2 seconds
+                        
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Something went wrong. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

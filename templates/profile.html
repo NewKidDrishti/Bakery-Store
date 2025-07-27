@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f2f2f2;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #A2D3CE;
+            color: mediumpurple;
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        main {
+            flex-grow: 1; /* Allows main to take up remaining space */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            font-family: 'Courier New', monospace;
+        }
+
+        .profile-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .profile-container h2 {
+            color: #A2D3CE;
+        }
+        
+        .profile-info {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .profile-info p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .profile-info strong {
+            color: mediumpurple;
+        }
+
+        footer {
+            background-color: #A2D3CE;
+            color: mediumpurple;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+    </style>
+    <title>User Profile</title>
+</head>
+<body>
+    <header>
+        <h1 style="font-family: Papyrus, serif; padding-left: 40px;">Delish Delight- By Drishti</h1>
+        <nav>
+            <ul>
+                <li> Hello, {{ user.first_name }}</li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'orders' %}">Orders</a></li>
+                <li><a href="{% url 'view_cart' %}">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="profile-container">
+            <h2>User Profile</h2>
+            <div class="profile-info">
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>First Name:</strong> {{ user.first_name }}</p>
+                <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; Drishti's Imaginary Bakery</p>
+    </footer>
+</body>
+</html>
