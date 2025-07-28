@@ -76,7 +76,7 @@
   <header>
     <h1><b>DELISH DELIGHT</b></h1>
   </header>
-  <form action='register' method='post'>
+  <form action="{% url 'register' %}" method="post">
     {% csrf_token %}
     <input type='text' name='first_name' placeholder='First Name'><br>
     <input type='text' name='last_name' placeholder='Last Name'><br>
