@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -163,3 +164,24 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+
+if not DEBUG: # Only use S3 in production (when DEBUG is False)
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = 'b.akery-b.ucket' # Replace with your bucket name
+    AWS_S3_REGION_NAME = 'eu-north-1' # Replace with your bucket's region
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_DEFAULT_ACL = None # Or 'public-read' if you want files publicly accessible without extra steps
+
+    # The URL where your media files will be served from (S3)
+    MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/media/"
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+    # Optional: If you want to put your media files in a 'media' subfolder in your bucket
+    AWS_LOCATION = 'media'
+
+else: # Local media settings for development (when DEBUG is True)
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
