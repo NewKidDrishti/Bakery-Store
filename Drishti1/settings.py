@@ -165,6 +165,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+STATICFILES_DIRS = [
+    BASE_DIR / 'static' # This now correctly points to C:\Users\butte\projects\Drishti1\static
+]
+
 
 
 if not DEBUG: # Only use S3 in production (when DEBUG is False)
