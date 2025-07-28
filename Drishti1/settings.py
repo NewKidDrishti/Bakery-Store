@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-gzuds@e$vi&le^o0tq@*^-&xo%tj8e0--#p_$4o2cq-m=@zh=e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -85,6 +85,7 @@ if 'RENDER_EXTERNAL_HOSTNAME' in os.environ:
     DATABASES = {
         'default': dj_database_url.config(
             default=os.environ.get('DATABASE_URL'),
+            engine= 'django.db.backends.postgresql',
             conn_max_age=600
         )
     }
