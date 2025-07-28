@@ -52,7 +52,19 @@
             padding: 10px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             position: relative; /* Needed for positioning the message */
+
+            /* --- NEW CSS for Hover Animation --- */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for scale and shadow */
+            /* --- END NEW CSS --- */
         }
+
+        /* --- NEW CSS for Hover Animation --- */
+        .product:hover {
+            transform: translateY(-5px) scale(1.02); /* Lifts the card up slightly and scales it a bit */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Makes the shadow more prominent */
+            cursor: pointer; /* Indicates it's interactive */
+        }
+        /* --- END NEW CSS --- */
         
         .product button[type="submit"] {
             background-color: #ffb6c1;
