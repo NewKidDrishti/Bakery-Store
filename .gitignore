@@ -1,0 +1,15 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+
+# OS
+.DS_Store
+.env
+
+# Database
+db.sqlite3
+
+# Media
+# We will remove this line later to upload media
